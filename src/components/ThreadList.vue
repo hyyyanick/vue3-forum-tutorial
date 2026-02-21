@@ -2,7 +2,12 @@
 import { ref } from 'vue'
 import sourceData from '@/data.json'
 
-const threads = ref(sourceData.threads)
+defineProps({
+  threads: {
+    type: Array,
+    required: true
+  }
+})
 const users = ref(sourceData.users)
 
 function userById (userId) {
@@ -18,10 +23,8 @@ function userById (userId) {
       <div v-for="thread in threads" :key="thread.id" class="thread">
         <div>
           <p>
-            <router-link
-              :to="{ name: 'ThreadShow', params: { id: thread.id } }"
-            >{{ thread.title }}</router-link
-            >
+<!--            Using router link will not reload the page and much more faster than using the a tag-->
+            <router-link :to="{ name: 'ThreadShow', params: { id: thread.id } }">{{ thread.title }}</router-link>
           </p>
           <p class="text-faded text-xsmall">
             By <a href="#">{{ userById(thread.userId).name }}</a

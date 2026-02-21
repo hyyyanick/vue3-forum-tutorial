@@ -1,5 +1,5 @@
 <template>
-    <div v-if="thread" class="col-large push-top">
+    <div class="col-large push-top">
       <h1>{{ thread.title }}</h1>
 
       <div class="post-list">
@@ -30,14 +30,11 @@
         </div>
       </div>
     </div>
-    <div v-else class="col-large push-top">
-      <h1>Thread not found</h1>
-    </div>
 </template>
 
 <script setup>
 import sourceData from '@/data.json'
-import { computed, ref, defineProps } from 'vue'
+import { computed, ref } from 'vue'
 
 const props = defineProps({
   id: {
