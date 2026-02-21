@@ -1,0 +1,67 @@
+<template>
+    <div v-if="thread" class="col-large push-top">
+      <h1>{{ thread.title }}</h1>
+
+      <div class="post-list">
+        <div class="post"
+              v-for="postId in thread.posts"
+              :key="postId">
+
+          <div class="user-info">
+            <a href="#" class="user-name">{{ userById(postById(postId)?.userId)?.name }}</a>
+
+            <a href="#">
+              <img :src="userById(postById(postId)?.userId)?.avatar" alt="" class="avatar-large">
+            </a>
+
+            <p class="desktop-only text-small"></p>
+
+          </div>
+
+          <div class="post-content">
+            <div>
+              <p>{{ postById(postId)?.text }}</p>
+            </div>
+          </div>
+
+          <div class="post-date text-faded">
+            {{ postById(postId)?.publishedAt }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div v-else class="col-large push-top">
+      <h1>Thread not found</h1>
+    </div>
+</template>
+
+<script setup>
+import sourceData from '@/data.json'
+import { computed, ref, defineProps } from 'vue'
+
+const props = defineProps({
+  id: {
+    type: String,
+    required: true
+  }
+})
+
+const posts = ref(sourceData.posts)
+const users = ref(sourceData.users)
+const threads = ref(sourceData.threads)
+
+const thread = computed(() => threads.value.find((t) => t.id === props.id))
+
+function postById (postId) {
+  return posts.value.find((p) => p.id === postId)
+}
+
+function userById (userId) {
+  return users.value.find((u) => u.id === userId)
+}
+
+</script>
+
+<style scoped>
+
+</style>
