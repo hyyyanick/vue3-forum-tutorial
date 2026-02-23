@@ -23,13 +23,13 @@ function userById (userId) {
          :key="post.postId">
 
       <div class="user-info">
-        <a href="#" class="user-name">{{ userById(post.postId)?.userId?.name }}</a>
+        <a href="#" class="user-name">{{ userById(post.userId)?.name }}</a>
 
         <a href="#">
           <img :src="userById(post?.userId)?.avatar" alt="" class="avatar-large">
         </a>
 
-        <p class="desktop-only text-small"></p>
+        <p class="desktop-only text-small">107 posts</p>
 
       </div>
 
