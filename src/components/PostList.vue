@@ -1,11 +1,6 @@
 <script setup>
 import { ref } from 'vue'
 import sourceData from '@/data.json'
-import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
-import localizedFormat from 'dayjs/plugin/localizedFormat'
-dayjs.extend(relativeTime)
-dayjs.extend(localizedFormat)
 
 const users = ref(sourceData.users)
 
@@ -18,14 +13,6 @@ defineProps({
 
 function userById (userId) {
   return users.value.find((u) => u.id === userId)
-}
-
-function diffFromNow (date) {
-  return dayjs.unix(date).fromNow()
-}
-
-function humanFriendlyDate (date) {
-  return dayjs.unix(date).format('llll')
 }
 
 </script>
@@ -44,7 +31,6 @@ function humanFriendlyDate (date) {
         </a>
 
         <p class="desktop-only text-small">107 posts</p>
-
       </div>
 
       <div class="post-content">
@@ -53,8 +39,8 @@ function humanFriendlyDate (date) {
         </div>
       </div>
 
-      <div class="post-date text-faded" :title="humanFriendlyDate(post?.publishedAt)">
-        {{ diffFromNow(post?.publishedAt) }}
+      <div class="post-date text-faded">
+        <app-date :timestamp="post.publishedAt" />
       </div>
     </div>
   </div>
