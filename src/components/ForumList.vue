@@ -3,7 +3,12 @@ defineProps({
   forums: {
     type: Array,
     required: true
-  }
+  },
+  categoryName: {
+    type: String,
+    required: true
+  },
+  categoryId: String
 })
 
 function forumThreadsWord (forum) {
@@ -20,7 +25,8 @@ function forumThreadsWord (forum) {
   <div class="col-full">
     <div class="forum-list">
       <h2 class="list-title">
-        Forums
+        <router-link v-if="categoryId" :to="{ name: 'Category', params: { categoryId: categoryId }}">{{ categoryName }}</router-link>
+        <span v-else>{{ categoryName }}</span>
       </h2>
 
       <div class="forum-listing" v-for="forum in forums" :key="forum.id">
