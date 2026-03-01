@@ -2,8 +2,10 @@
 import sourceData from '@/data.json'
 import { computed, ref } from 'vue'
 import ForumList from '@/components/ForumList.vue'
+import { useCategoriesStore } from '@/stores/CategoriesStore'
+const categoriesStore = useCategoriesStore()
 
-const categories = ref(sourceData.categories)
+const categories = categoriesStore.categories
 const forums = ref(sourceData.forums)
 
 const groupedForums = computed(() => {

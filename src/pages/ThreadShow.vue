@@ -7,10 +7,11 @@
 </template>
 
 <script setup>
-import sourceData from '@/data.json'
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import PostList from '@/components/PostList.vue'
 import PostEditor from '@/components/PostEditor.vue'
+import { useThreadsStore } from '@/stores/ThreadsStore'
+import { usePostsStore } from '@/stores/PostsStore'
 
 const props = defineProps({
   id: {
@@ -19,18 +20,19 @@ const props = defineProps({
   }
 })
 
-const threads = ref(sourceData.threads)
-const posts = ref(sourceData.posts)
+const threadsStore = useThreadsStore()
+const postsStore = usePostsStore()
+const posts = postsStore.posts
 
-const thread = computed(() => threads.value.find((t) => t.id === props.id))
-const threadPosts = computed(() => posts.value.filter((p) => p.threadId === props.id))
+const thread = computed(() => threadsStore.threads.find((t) => t.id === props.id))
+const threadPosts = computed(() => posts.filter((p) => p.threadId === props.id))
 
 function addPost (event) {
   const newPost = {
     ...event.newPost,
     threadId: props.id
   }
-  posts.value.push(newPost)
+  postsStore.createPost(newPost)
 }
 
 </script>

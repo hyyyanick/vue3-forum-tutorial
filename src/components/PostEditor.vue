@@ -5,12 +5,10 @@ const text = ref('')
 const emit = defineEmits(['save'])
 
 function save () {
-  const postId = 'adsfdsf' + Math.random()
   const newPost = {
     text: text.value,
     userId: 'FsCDAk9w8NeXEceLV87arpsXjnQ2',
-    publishedAt: Math.floor(Date.now() / 1000),
-    id: postId
+    publishedAt: Math.floor(Date.now() / 1000)
   }
   emit('save', { newPost })
   text.value = ''
