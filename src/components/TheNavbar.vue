@@ -23,7 +23,7 @@ const user = userStore.authUser
     <nav class="navbar">
       <ul>
         <li class="navbar-user">
-          <router-link>
+          <router-link :to="{name: 'Profile'}">
             <img
               class="avatar-small"
               :src="user.avatar"
