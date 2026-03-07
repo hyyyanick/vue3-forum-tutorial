@@ -23,5 +23,10 @@ export const useUsersStore = defineStore('UsersStore', () => {
     }
   })
 
-  return { authUser }
+  function updateUser (newUser) {
+    const userId = users.value.findIndex(user => user.id === newUser.id)
+    users.value[userId] = newUser
+  }
+
+  return { authUser, updateUser }
 })

@@ -12,6 +12,7 @@ import PostList from '@/components/PostList.vue'
 import PostEditor from '@/components/PostEditor.vue'
 import { useThreadsStore } from '@/stores/ThreadsStore'
 import { usePostsStore } from '@/stores/PostsStore'
+import { useUsersStore } from '@/stores/UsersStore'
 
 const props = defineProps({
   id: {
@@ -22,14 +23,18 @@ const props = defineProps({
 
 const threadsStore = useThreadsStore()
 const postsStore = usePostsStore()
-const posts = postsStore.posts
+const usersStore = useUsersStore()
 
+const posts = postsStore.posts
 const thread = computed(() => threadsStore.threads.find((t) => t.id === props.id))
 const threadPosts = computed(() => posts.filter((p) => p.threadId === props.id))
+const authUser = usersStore.authUser
 
 function addPost (event) {
   const newPost = {
     ...event.newPost,
+    userId: authUser.id,
+    publishedAt: Math.floor(Date.now() / 1000),
     threadId: props.id
   }
   postsStore.createPost(newPost)

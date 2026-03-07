@@ -6,9 +6,7 @@ const emit = defineEmits(['save'])
 
 function save () {
   const newPost = {
-    text: text.value,
-    userId: 'FsCDAk9w8NeXEceLV87arpsXjnQ2',
-    publishedAt: Math.floor(Date.now() / 1000)
+    text: text.value
   }
   emit('save', { newPost })
   text.value = ''

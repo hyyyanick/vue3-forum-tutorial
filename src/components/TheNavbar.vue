@@ -1,15 +1,18 @@
 <script setup>
+import { storeToRefs } from 'pinia'
 import { useUsersStore } from '@/stores/UsersStore'
 
 const userStore = useUsersStore()
-const user = userStore.authUser
+/* In order to extract properties from the store while keeping its reactivity,
+you need to use storeToRefs(). It will create refs for every reactive property. */
+const { authUser: user } = storeToRefs(userStore)
 
 </script>
 
 <template>
   <header class="header" id="header">
     <router-link :to="{name: 'Home'}" class="logo">
-      <img src="../assets/svg/vueschool-logo.svg" />
+      <img src="../assets/svg/vueschool-logo.svg" alt="VueSchool logo"/>
     </router-link>
 
     <div class="btn-hamburger">
