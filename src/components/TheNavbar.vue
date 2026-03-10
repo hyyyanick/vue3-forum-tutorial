@@ -1,11 +1,15 @@
 <script setup>
 import { storeToRefs } from 'pinia'
 import { useUsersStore } from '@/stores/UsersStore'
+import { computed } from 'vue'
 
 const userStore = useUsersStore()
-/* In order to extract properties from the store while keeping its reactivity,
-you need to use storeToRefs(). It will create refs for every reactive property. */
-const { authUser: user } = storeToRefs(userStore)
+/* Instead of using storeToRefs() to extract properties from the store, we can use computed() as well.
+* Use storeToRefs(userStore) if want local aliases from the store.
+* Use computed if only need one derived alias and want minimal Pinia-specific API.
+*/
+// const { authUser: user } = storeToRefs(userStore)
+const user = computed(() => userStore.authUser)
 
 </script>
 
@@ -48,7 +52,7 @@ const { authUser: user } = storeToRefs(userStore)
             <div class="triangle-drop"></div>
             <ul class="dropdown-menu">
               <li class="dropdown-menu-item">
-                <a href="profile.html">View profile</a>
+                <router-link :to="{name: 'Profile'}">View profile</router-link>
               </li>
               <li class="dropdown-menu-item"><a href="#">Log out</a></li>
             </ul>
