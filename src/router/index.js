@@ -6,6 +6,7 @@ import Category from '@/pages/Category.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import sourceData from '@/data.json'
 import Profile from '@/pages/Profile.vue'
+import ThreadCreate from '@/pages/ThreadCreate.vue'
 
 const routes = [
   {
@@ -55,6 +56,12 @@ const routes = [
         })
       }
     }
+  },
+  {
+    path: '/forum/:forumId/thread/create',
+    name: 'ThreadCreate',
+    component: ThreadCreate,
+    props: true
   },
   {
     path: '/:pathMatch(.*)*',

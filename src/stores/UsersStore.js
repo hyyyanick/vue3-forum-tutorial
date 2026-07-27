@@ -28,5 +28,5 @@ export const useUsersStore = defineStore('UsersStore', () => {
     users.value[userId] = newUser
   }
 
-  return { authUser, updateUser }
+  return { authId, authUser, updateUser }
 })

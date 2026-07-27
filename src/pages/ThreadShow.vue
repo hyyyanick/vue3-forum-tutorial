@@ -28,12 +28,12 @@ const usersStore = useUsersStore()
 const posts = postsStore.posts
 const thread = computed(() => threadsStore.threads.find((t) => t.id === props.id))
 const threadPosts = computed(() => posts.filter((p) => p.threadId === props.id))
-const authUser = usersStore.authUser
+const authId = usersStore.authId
 
 function addPost (event) {
   const newPost = {
     ...event.newPost,
-    userId: authUser.id,
+    userId: authId,
     publishedAt: Math.floor(Date.now() / 1000),
     threadId: props.id
   }

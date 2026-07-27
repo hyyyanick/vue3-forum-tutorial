@@ -1,5 +1,4 @@
 <script setup>
-import { storeToRefs } from 'pinia'
 import { useUsersStore } from '@/stores/UsersStore'
 import { computed } from 'vue'
 
